@@ -4,7 +4,7 @@ Plugin Name: Azur Update GIT Plugins
 Plugin URI: https://github.com/sinky/
 Version: 1.0
 Author: Marco Krage
-Author URI: http://my-azur.de
+Author URI: https://my-azur.de
 Description: Update my WP Plugins with GIT
 */
 
