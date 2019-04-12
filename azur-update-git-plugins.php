@@ -52,7 +52,8 @@ function azur_update_git_plugins() {
 		echo '<pre>';
 		chdir(WP_PLUGIN_DIR."/$azur_plugin");
 		if(file_exists(".git")){
-			passthru("git pull");
+			passthru("git fetch --all");
+			passthru("git reset --hard origin/master");
 			echo(PHP_EOL);
 		}else{
 			echo "Not a git repository (.git not found)".PHP_EOL;
