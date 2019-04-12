@@ -2,7 +2,7 @@
 /*
 Plugin Name: Azur Update GIT Plugins
 Plugin URI: https://github.com/sinky/
-Version: 1.0
+Version: 1.1
 Author: Marco Krage
 Author URI: https://my-azur.de
 Description: Update my WP Plugins with GIT
@@ -52,11 +52,20 @@ function azur_update_git_plugins() {
 		echo '<pre>';
 		chdir(WP_PLUGIN_DIR."/$azur_plugin");
 		if(file_exists(".git")){
-			passthru("git fetch --all");
-			passthru("git reset --hard origin/master");
+			passthru("git fetch");
+			$headHash = shell_exec("git rev-parse HEAD");
+			$upstreamHash = shell_exec("git rev-parse master@{upstream}");
+			
+			if($headHash != $upstreamHash) {
+				echo "Running update.".PHP_EOL;
+				passthru("git fetch --all");
+				passthru("git reset --hard origin/master");
+			}else{
+				echo "No Update necessary.".PHP_EOL;
+			}
 			echo(PHP_EOL);
 		}else{
-			echo "Not a git repository (.git not found)".PHP_EOL;
+			echo "No .git not found".PHP_EOL;
 			echo(PHP_EOL);
 		}
 		echo '</pre>';
